@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodWorld</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <header id="header" class="header-container">
+        <span class="header-arrow inactive">&lt;</span>
+        <h1 class="header-title">FoodWorld</h1>
+        <h1 class="header-title header-title--categoryView inactive">Recetas</h1>
+
+        <form id="searchForm" class="header-searchForm"></form>
+        <input type="text" placeholder="Buscar">
+        <button>🔎</button>
+        </form>
+    </header>
+
+    <section id="trendingPreview" class="trendingPreview-container">
+        <div class="trendingPreview-header">
+            <h2 class="trendingPreview-title">Comidas populares</h2>
+            <button class="trendingPreview-btn">Ver más</button>
+        </div>
+        <article class="trendingPreview-foodList">
+            <div class="food-container">
+                <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
+            </div>
+
+            <div class="food-container">
+                <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
+            </div>
+
+            <div class="food-container">
+                <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
+            </div>
+
+            <div class="food-container">
+                <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
+            </div>
+        </article>
+    </section>
+    <!-- categoria inicio -->
+    <section id="categoriesPreview" class="categoriesPreview-container">
+        <h2 class="categoriesPreview-title">Categorías</h2>
+        <article class="categoriesPreview-List">
+
+            <div class="category-container">
+                <h3 id="id28" class="category-title">Desayuno</h3>
+            </div>
+
+            <div class="category-container">
+                <h3 id="id16" class="category-title">Comidas</h3>
+            </div>
+            <div class="category-container">
+                <h3 id="id14" class="category-title">Postres</h3>
+            </div>
+
+        </article>
+    </section>
+
+    <!-- lista generica en vertical -->
+    <section id="genericList" class="genericList-container inactive">
+        <div class="food-container">
+            <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
+        </div>
+        <div class="food-container">
+            <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
+        </div>
+        <div class="food-container">
+            <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
+        </div>
+        <div class="food-container">
+            <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
+        </div>
+    </section>
+
+    <section id="foodDetail" class="foodDetail-container inactive">
+        <h1 class="foodDetail-title">Nombre plato</h1>
+        <p class="foodDetail-description"> Descripcion del plato</p>
+        <article class="categories-list">
+            <div class="category-container">
+                <h3 id="id28" class="catergory-title">Desayuno</h3>
+            </div>
+
+            <div class="category-container">
+                <h3 id="id16" class="catergory-title">Comidas</h3>
+            </div>
+            <div class="category-container">
+                <h3 id="id14" class="catergory-title">Postres</h3>
+            </div>
+        </article>
+
+        <article class="relatedFood-container">
+            <h2 class="relatedFood-title">Comidas similares</h2>
+
+            <div class="relatedFood-scrollContainer">
+                <div class="food-container">
+                    <img src="./cosa-mano-familia-addams-miercoles.jpg" alt="">
+                </div>
+                <div class="food-container">
+                    <img src="./cosa-mano-familia-addams-miercoles.jpg" alt="">
+                </div>
+                <div class="food-container">
+                    <img src="./cosa-mano-familia-addams-miercoles.jpg" alt="">
+                </div>
+                <div class="food-container">
+                    <img src="./cosa-mano-familia-addams-miercoles.jpg" alt="">
+                </div>
+            </div>
+        </article>
+    </section>
+    <footer>Prueba</footer>
+    <script src="./script.js"></script>
+</body>
+
+</html>

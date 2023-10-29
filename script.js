@@ -1,21 +1,24 @@
-async function vegan() {
-  const res = await fetch(
-    "https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegan"
-  );
-  const data = await res.json();
+async function categoriesFood() {
+  try {
+    const response = await fetch(
+      "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+    );
+    if (response.status === 200) {
+      const data = await response.json();
 
-  const meals = data.meals;
+      const categories = data.meals;
 
-  const imgVegn1 = document.getElementById("img_veg1");
-  const imgVegn2 = document.getElementById("img_veg2");
-  const imgVegn3 = document.getElementById("img_veg3");
-
-  imgVegn1.src = meals[0].strMealThumb;
-  imgVegn2.src = meals[1].strMealThumb;
-  imgVegn3.src = meals[2].strMealThumb;
+      categories.forEach((category) => {
+        console.log(category.strCategory);
+      });
+    } else {
+      alert("Error en la solicitud a la API");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }
-
-vegan();
+categoriesFood();
 
 //POR CATEGORIAS
 
