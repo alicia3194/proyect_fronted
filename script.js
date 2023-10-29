@@ -2,7 +2,7 @@
 
 async function getRandomFoodPreview() {
   try {
-    const numRandomMeals = 10;
+    const numRandomMeals = 8;
     const randomMeals = [];
 
     for (let i = 0; i < numRandomMeals; i++) {

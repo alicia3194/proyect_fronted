@@ -45,8 +45,8 @@ h1, h2, h3 {
 }
 
 h1, h2 {
-    display: flex;
-    justify-content:left;
+display: flex;
+justify-content:left;
   font-size: 24px;
   color: var(--purple-dark-2);
   font-family: var(--font-family-titles);
@@ -66,6 +66,7 @@ h3 {
   font-weight: var(--font-weight-text2);
   font-size: 16px;
 }
+
 .opening-paragraph p{
     display: flex;
     justify-content: center;
@@ -250,7 +251,7 @@ button {
     border-radius: 10px;
     width: 150px;
   }
-#id1 { color: #2A0646; }
+#id1 { color: #2A0646;}
 #id2 { color: #B7EAC5; }
 #id3 {color: #A2EEE5;}
 #id4 { color: #8c18a3; }
@@ -360,7 +361,7 @@ button {
 
 /* Footer */
 footer {
-  background-color: var(--purple-medium-3);
+  background-color:  var(--darkBlue);
   color: var(--purple-light-2);
   text-align: center;
   height: 40px;
