@@ -45,12 +45,14 @@ h1, h2, h3 {
 }
 
 h1, h2 {
+    display: flex;
+    justify-content:left;
   font-size: 24px;
   color: var(--purple-dark-2);
   font-family: var(--font-family-titles);
   font-weight: var(--font-weight-title1);
-  margin: 0;
-  padding: 0;
+  margin: 20px;
+  padding: 5px;
 }
 
 h2 {
@@ -64,8 +66,16 @@ h3 {
   font-weight: var(--font-weight-text2);
   font-size: 16px;
 }
+.opening-paragraph p{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    padding: 10px;
+
+}
 
 input {
+   margin-left: 26px;
   background-color: var(--purple-light-2);
   color: var(--purple-medium-2);
   border: none;
@@ -79,6 +89,7 @@ input::placeholder {
 }
 
 button {
+    margin: 10px;
   background-color: var(--purple-dark-1);
   border: none;
   color: var(--purple-light-2);
@@ -192,8 +203,8 @@ button {
   overflow-y: hidden;
   white-space: nowrap;
   height: 241px;
-  padding-left: 24px;
   padding-bottom: 16px;
+  padding-right: 5px;
 }
 
 .trendingPreview-foodList .food-container {
@@ -212,11 +223,9 @@ button {
 
 
 /* Categories */
-.category-container {
-  width: 45%;
-}
 
 .category-title {
+    display: flex;
   margin-bottom: 8px;
   cursor: pointer;
   white-space: nowrap;
@@ -233,10 +242,36 @@ button {
   width: 8px;
   height: 8px;
 }
-#id28 { --idColor: var(--yellow); }
-#id14 { --idColor: var(--red); }
-#id16 { --idColor: var(--green); }
+.category-container {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin: 5px;
+    border-radius: 10px;
+    width: 150px;
+  }
+#id1 { color: #2A0646; }
+#id2 { color: #B7EAC5; }
+#id3 {color: #A2EEE5;}
+#id4 { color: #8c18a3; }
+#id5 { color: #37f069; }
+#id6 {color: #A2EEE5;}
+#id7 { color: #183a90; }
+#id8 { color: #B7EAC5; }
+#id9 {color: #A2EEE5;}
+#id10 { color: #B7EAC5; }
+#id11 {color: #12f3d9;}
+#id12 {color: #e9229a;}
+#id13 {color: #d2e731;}
+#id14 {color: #0e5850;}
 
+.categoriesPreview-List {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 200px 200px; 
+    gap: 5px; 
+    text-align: center;
+  }
 /* Generic List (search, trending & category) */
 .genericList-container {
   display: flex;
