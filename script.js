@@ -1,24 +1,17 @@
-async function categoriesFood() {
+async function getCategoriesFoodPreview() {
   try {
     const response = await fetch(
-      "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+      "https://www.themealdb.com/api/json/v1/1/random.php"
     );
-    if (response.status === 200) {
-      const data = await response.json();
+    const data = await response.json();
+    const food = data.meals;
 
-      const categories = data.meals;
-
-      categories.forEach((category) => {
-        console.log(category.strCategory);
-      });
-    } else {
-      alert("Error en la solicitud a la API");
-    }
+    console.log(data, food);
   } catch (error) {
     console.error(error);
   }
 }
-categoriesFood();
+getCategoriesFoodPreview();
 
 //POR CATEGORIAS
 
