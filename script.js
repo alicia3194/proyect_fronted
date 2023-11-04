@@ -14,7 +14,7 @@ async function getRandomFoodPreview() {
         const data = await response.json();
         const food = data.meals[0];
 
-        const trendingPreviewFoodContainer = document.querySelector(
+        const trendingPreviewSection = document.querySelector(
           "#trendingPreview .trendingPreview-foodList"
         );
 
@@ -27,7 +27,7 @@ async function getRandomFoodPreview() {
         foodImg.setAttribute("src", food.strMealThumb);
 
         foodContainer.appendChild(foodImg);
-        trendingPreviewFoodContainer.appendChild(foodContainer);
+        trendingPreviewSection.appendChild(foodContainer);
 
         randomMeals.push(food);
       } else {
@@ -54,10 +54,10 @@ async function getCategoriesPreview() {
 
       categories.forEach((category, index) => {
         const categoryTitle = category.strCategory;
-        const categoryContainer = document.querySelector(
+        const categoriesPreviewList = document.querySelector(
           `.category-container:nth-child(${index + 1}) .category-title`
         );
-        categoryContainer.textContent = categoryTitle;
+        categoriesPreviewList.textContent = categoryTitle;
       });
     } else {
       alert("Error en la solicitud a la API");
@@ -90,3 +90,168 @@ getCategoriesPreview();
 // strInstructions (instrucciones de los platos)
 
 //sale mucha más información
+
+//NODE
+// Sections
+const headerSection = document.querySelector("#header");
+const trendingPreviewSection = document.querySelector("#trendingPreview");
+const categoriesPreviewSection = document.querySelector("#categoriesPreview");
+const genericSection = document.querySelector("#genericList");
+const foodDetailSection = document.querySelector("#foodDetail");
+
+// Lists & Containers
+const searchForm = document.querySelector("#searchForm");
+const trendingFoodPreviewList = document.querySelector(
+  ".trendingPreview-foodList"
+);
+const categoriesPreviewList = document.querySelector(".categoriesPreview-list");
+const foodDetailCategoriesList = document.querySelector(
+  "#foodDetail .categories-list"
+);
+const relatedFoodContainer = document.querySelector(
+  ".relatedFood-scrollContainer"
+);
+
+// Elements
+const headerTitle = document.querySelector(".header-title");
+const arrowBtn = document.querySelector(".header-arrow");
+const headerCategoryTitle = document.querySelector(
+  ".header-title--categoryView"
+);
+
+const searchFormInput = document.querySelector("#searchForm input");
+const searchFormBtn = document.querySelector("#searchBtn");
+
+const trendingBtn = document.querySelector(".trendingPreview-btn");
+
+const foodDetailTitle = document.querySelector(".foodDetail-title");
+const foodDetailDescription = document.querySelector(".foodDetail-description");
+const foodDetailScore = document.querySelector(".foosDetail-score");
+
+//Función navegación
+
+searchFormBtn.addEventListener("click", () => {
+  location.hash = "#search=";
+});
+
+trendingBtn.addEventListener("click", () => {
+  location.hash = "#trends";
+});
+
+arrowBtn.addEventListener("click", () => {
+  location.hash = "#home";
+});
+
+window.addEventListener("DOMContentLoaded", navigation, false);
+window.addEventListener("hashchange", navigation, false);
+
+function navigation() {
+  if (location.hash.startsWith("#trends")) {
+    trendsPage();
+  } else if (location.hash.startsWith("#search=")) {
+    searchPage();
+  } else if (location.hash.startsWith("#food=")) {
+    foodDetailPage();
+  } else if (location.hash.startsWith("#category=")) {
+    categoriesPage();
+  } else {
+    homePage();
+  }
+}
+
+function homePage() {
+  console.log("HOME");
+  headerSection.classList.remove("header-container--long");
+
+  headerSection.style.background = "";
+
+  arrowBtn.classList.add("inactive");
+  arrowBtn.classList.remove("header-arrow--white");
+
+  headerTitle.classList.remove("inactive");
+  headerCategoryTitle.classList.add("inactive");
+
+  searchForm.classList.remove("inactive");
+  trendingPreviewSection.classList.remove("inactive");
+  categoriesPreviewSection.classList.remove("inactive");
+
+  genericSection.classList.add("inactive");
+  foodDetailSection.classList.add("inactive");
+
+  getRandomFoodPreview();
+  getCategoriesPreview();
+}
+
+function categoriesPage() {
+  console.log("CATEGORIES");
+
+  headerSection.classList.remove("header-container--long");
+  headerSection.style.background = "";
+
+  arrowBtn.classList.remove("inactive");
+  arrowBtn.classList.remove("header-arrow--white");
+
+  headerTitle.classList.add("incative");
+  headerCategoryTitle.classList.remove("inactive");
+
+  searchForm.classList.add("inactive");
+
+  trendingPreviewSection.classList.add("inactive");
+  categoriesPreviewSection.classList.add("inactive");
+  genericSection.classList.remove("inactive");
+  foodDetailSection.classList.add("inactive");
+}
+function foodDetailPage() {
+  console.log("FOOD");
+
+  headerSection.classList.remove("header-container--long");
+  // headerSection.style.background = "";
+
+  arrowBtn.classList.remove("inactive");
+  arrowBtn.classList.remove("header-arrow--white");
+
+  headerTitle.classList.add("inactive");
+  headerCategoryTitle.classList.add("inactive");
+  searchForm.classList.add("inactive");
+
+  trendingPreviewSection.classList.add("inactive");
+  categoriesPreviewSection.classList.add("inactive");
+  genericSection.classList.add("inactive");
+  foodDetailSection.classList.remove("inactive");
+}
+function searchPage() {
+  console.log("SEARCH");
+
+  headerSection.classList.remove("header-container--long");
+  headerSection.style.background = "";
+
+  arrowBtn.classList.remove("inactive");
+  arrowBtn.classList.remove("header-arrow--white");
+
+  headerTitle.classList.add("inactive");
+  headerCategoryTitle.classList.remove("inactive");
+  searchForm.classList.remove("inactive");
+
+  trendingPreviewSection.classList.add("inactive");
+  categoriesPreviewSection.classList.add("inactive");
+  genericSection.classList.remove("inactive");
+  foodDetailSection.classList.add("inactive");
+}
+function trendsPage() {
+  console.log("TRENDS");
+
+  headerSection.classList.remove("header-container--long");
+  headerSection.style.background = "";
+
+  arrowBtn.classList.remove("inactive");
+  arrowBtn.classList.remove("header-arrow--white");
+
+  headerTitle.classList.add("inactive");
+  headerCategoryTitle.classList.remove("inactive");
+  searchForm.classList.add("inactive");
+
+  trendingPreviewSection.classList.add("inactive");
+  categoriesPreviewSection.classList.add("inactive");
+  genericSection.classList.remove("inactive");
+  foodDetailSection.classList.add("inactive");
+}
