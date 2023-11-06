@@ -5,36 +5,34 @@ async function getRandomFoodPreview() {
     const numRandomMeals = 8;
     const randomMeals = [];
 
+    const trendingPreviewSection = document.querySelector(
+      "#trendingPreview .trendingPreview-foodList"
+    );
+
+    // Para no repetir cuando se vuelve al inicio
+    trendingPreviewSection.innerHTML = "";
+
     for (let i = 0; i < numRandomMeals; i++) {
       const response = await fetch(
         "https://www.themealdb.com/api/json/v1/1/random.php"
       );
 
-      if (response.status === 200) {
-        const data = await response.json();
-        const food = data.meals[0];
+      const data = await response.json();
+      const food = data.meals[0];
 
-        const trendingPreviewSection = document.querySelector(
-          "#trendingPreview .trendingPreview-foodList"
-        );
+      const foodContainer = document.createElement("div");
+      foodContainer.classList.add("food-container");
 
-        const foodContainer = document.createElement("div");
-        foodContainer.classList.add("food-container");
+      const foodImg = document.createElement("img");
+      foodImg.classList.add("food-img");
+      foodImg.setAttribute("alt", food.strMeal);
+      foodImg.setAttribute("src", food.strMealThumb);
 
-        const foodImg = document.createElement("img");
-        foodImg.classList.add("food-img");
-        foodImg.setAttribute("alt", food.strMeal);
-        foodImg.setAttribute("src", food.strMealThumb);
+      foodContainer.appendChild(foodImg);
+      trendingPreviewSection.appendChild(foodContainer);
 
-        foodContainer.appendChild(foodImg);
-        trendingPreviewSection.appendChild(foodContainer);
-
-        randomMeals.push(food);
-      } else {
-        alert("Error en la solicitud a la API");
-      }
+      randomMeals.push(food);
     }
-    console.log("Comidas aleatorias:", randomMeals);
   } catch (error) {
     console.error(error);
   }
@@ -48,48 +46,29 @@ async function getCategoriesPreview() {
       "https://www.themealdb.com/api/json/v1/1/categories.php"
     );
 
-    if (response.status === 200) {
-      const data = await response.json();
-      const categories = data.categories;
+    const data = await response.json();
+    const categories = data.categories;
 
-      categories.forEach((category, index) => {
-        const categoryTitle = category.strCategory;
-        const categoriesPreviewList = document.querySelector(
-          `.category-container:nth-child(${index + 1}) .category-title`
-        );
-        categoriesPreviewList.textContent = categoryTitle;
-      });
-    } else {
-      alert("Error en la solicitud a la API");
-    }
+    // Igual que con la función getRandom
+    categoriesPreviewList.innerHTML = "";
+
+    categories.forEach((category) => {
+      const categoryContainer = document.createElement("div");
+      categoryContainer.classList.add("category-container");
+
+      const categoryTitle = document.createElement("h3");
+      categoryTitle.classList.add("category-title");
+      const categoryTitleText = document.createTextNode(category.strCategory);
+
+      categoryTitle.appendChild(categoryTitleText);
+      categoryContainer.appendChild(categoryTitle);
+      categoriesPreviewList.appendChild(categoryContainer);
+    });
   } catch (error) {
     console.error(error);
   }
 }
-
-//Llamar a las funciones
-getRandomFoodPreview();
 getCategoriesPreview();
-
-//POR CATEGORIAS
-
-// www.themealdb.com/api/json/v1/1/filter.php?c=Vegan --- HAY TRES
-//ID: 52942, 52794, 52775.
-
-//https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian  --- HAY +10
-
-//https://www.themealdb.com/api/json/v1/1/filter.php?c=Breakfast   --- HAY 8
-
-//https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert   -- HAY +10
-
-// -------------------
-
-// POR ID
-
-//buscar idMeal, strMeal(nombre plato),strCategory(vegano etc), strArea (pais)
-// strInstructions (instrucciones de los platos)
-
-//sale mucha más información
 
 //NODE
 // Sections
@@ -191,7 +170,7 @@ function categoriesPage() {
   arrowBtn.classList.remove("inactive");
   arrowBtn.classList.remove("header-arrow--white");
 
-  headerTitle.classList.add("incative");
+  headerTitle.classList.add("inactive");
   headerCategoryTitle.classList.remove("inactive");
 
   searchForm.classList.add("inactive");
