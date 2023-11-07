@@ -12,35 +12,34 @@
 <body>
     <nav class="search-bar">
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Índice de Recetas</a>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Recipes</a>
                 <ul>
-                    <li><a href="#">Veganas</a></li>
-                    <li><a href="#">Vegetarianas</a></li>
-                    <li><a href="#">Postres</a></li>
+                    <li><a href="#">Vegan</a></li>
+                    <li><a href="#">Vegetarian</a></li>
+                    <li><a href="#">Desserts</a></li>
                 </ul>
-            <li><a href="#">Contacto</a></li>
+            <li><a href="#">Contact</a></li>
             </li>
         </ul>
     </nav>
     <header id="header" class="header-container">
         <h1 class="header-title" src="./logo.png">FoodWorld 🌐</h1>
-        <h1 class="header-title header-title--categoryView inactive">Recetas</h1>
-        <input type="text" id="searchInput" placeholder="Buscar plato por nombre">
+        <input type="text" id="searchInput" placeholder="Search by plate name">
         <button id="searchButton">🔎</button>
-        <p>"Cocinar es una experiencia maravillosa: fácil, divertida y un excelente antídoto contra el estrés. El
-            secreto radica en encontrar una receta que te apasione, tener un poco de paciencia, utilizar ingredientes de
-            calidad, ¡y voilà! No hay recompensa más gratificante que escuchar un '¡Ohhh! ¡Esto está delicioso!' y
-            disfrutar del aroma que llena toda la casa, convirtiéndote en la envidia de tu vecindario.
+        <p>Cooking is a wonderful experience: easy, fun, and an excellent antidote to stress. The secret lies in finding
+            a recipe that excites you, having a bit of patience, using quality ingredients, and voilà! There's no more
+            rewarding feeling than hearing a 'Ohhh! This is delicious!' and enjoying the aroma that fills the entire
+            house, making you the envy of your neighborhood.</p>
 
-            En este blog, comparto contigo una colección de recetas que he recopilado a lo largo de los años. Estas
-            recetas provienen de mis abuelas, tías abuelas, mi madre, amigos de diferentes partes del mundo y de chefs
-            profesionales que demuestran que todo es posible con las herramientas que tenemos en la cocina.
+        <p>On my website, I share with you a collection of recipes I've gathered over the years. These recipes come from
+            my grandmothers, great-aunts, my mother, friends from different parts of the world, and professional chefs
+            who demonstrate that everything is possible with the tools we have in the kitchen.</p>
 
-            Aquí encontrarás una variedad de recetas veganas y vegetarianas de diferentes partes del mundo. Exploraremos
-            juntos los sabores y la diversidad de la comida basada en plantas, y aprenderemos a preparar platos
-            deliciosos que satisfarán tu paladar y nutrirán tu cuerpo. ¡Bienvenido a nuestro viaje culinario!"</p>
-        <div id="plateResults"></div>
+        <p>You'll find a variety of vegan and vegetarian recipes from different parts of the world. Together, we'll
+            explore the flavors and diversity of plant-based cuisine and learn to prepare delicious dishes that will
+            satisfy your palate and nourish your body.</p>
+        <p><strong>Welcome to our culinary journey!</strong></p>
     </header>
 
     <!-- Inicio de sesión -->
@@ -56,7 +55,7 @@
     <!-- LISTA DE COMIDAS + BUSCADAS -->
     <section id="trendingPreview" class="trendingPreview-container">
         <div class="trendingPreview-header">
-            <h2 class="trendingPreview-title">Recetas más buscadas</h2>
+            <h2 class="trendingPreview-title">Popular Recipes</h2>
         </div>
         <article class="trendingPreview-foodList">
         </article>
@@ -66,7 +65,7 @@
 
     <!-- Sección para mostrar imágenes aleatorias -->
     <section id="randomImages" style="display: none;">
-        <h2>Imágenes aleatorias</h2>
+        <h2>Random Images</h2>
         <div id="randomImageContainer">
             <!-- Imágenes aleatorias con JavaScript -->
         </div>
@@ -75,7 +74,10 @@
 
     <!-- Sección de categorías -->
     <section id="categoriesPreview" class="categoriesPreview-container">
-        <h2 class="categoriesPreview-title">Categorías</h2>
+        <h2 class="categoriesPreview-title">Categories</h2>
+        <!-- <img clas="img" src="./images/postre.jpeg" alt="">
+        <img clas="img" src="./images/vegano.jpeg" alt="">
+        <img clas="img" src="./images/vegetariana.webp" alt=""> -->
         <article id="categoriesPreviewList" class="categoriesPreview-list">
             <!-- Categorías con JavaScript -->
         </article>
@@ -84,8 +86,8 @@
     <!-- Sección para mostrar imágenes de la categoría -->
     <section id="categoryImages" class="categoryImages-container inactive">
         <div class="categoryImages-header">
-            <h2 class="categoryImages-title">Imágenes de la Categoría</h2>
-            <button class="categoryImages-backBtn">Volver</button>
+            <h2 class="categoryImages-title">Categories Images</h2>
+            <button class="categoryImages-backBtn">Back</button>
         </div>
         <article class="categoryImages-list">
             <!--Imágenes de la categoría seleccionada -->
