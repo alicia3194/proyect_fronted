@@ -10,24 +10,13 @@
   --purple-dark-1: #3E0F64;
   --purple-dark-2: #2A0646;
 
-  --yellow: #EECC75;
-  --green: #CAD297;
-  --aqua: #B7EAC5;
-  --lightBlue: #A2EEE5;
-  --darkBlue: #8EA2EA;
-  --red: #F09D9D;
 
   --font-family-titles: 'Dosis', sans-serif;
-  --font-family-text: 'Red Hat Display', sans-serif;
   --font-weight-title1: 800;
   --font-weight-title2: 700;
-  --font-weight-text1: 400;
-  --font-weight-text2: 500;
 }
 
-html {
-  background-color: var(--purple-medium-3);
-}
+
 
 body {
   background-color: var(--purple-light-1);
@@ -63,13 +52,6 @@ h3 {
   color: var(--purple-dark-2);
   font-weight: var(--font-weight-text2);
   font-size: 16px;
-}
-
-.opening-paragraph p {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-  padding: 10px;
 }
 
 input {
@@ -110,81 +92,54 @@ button {
 }
 
 .food-container {
+  display: flex;
+  justify-content: center;
   cursor: pointer;
+  margin: 10px;
 }
 
 .food-img {
   border-radius: 8px;
+  width: 400px;
 }
 
 .categoriesPreview-list, .categories-list {
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  flex-wrap: wrap;
+
 }
 
+.food-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.food-img {
+  border-radius: 8px;
+  width: 400px;
+}
+
+.food-title {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
 /* Header */
 .header-container {
   padding-top: 40px;
-}
-
-.header-container--long {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 19.27%, rgba(0, 0, 0, 0) 29.17%), url(https://pics.filmaffinity.com/Deadpool-777527803-large.jpg);
-  background-size: cover;
-  height: 480px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-.header-container--categoryView {
-  background: linear-gradient(180deg, rgba(238, 204, 117, 0.5) 0%, rgba(238, 204, 117, 0) 72.92%);
 }
 
 .header-title {
   margin-bottom: 16px;
 }
 
-.header-arrow {
-  font-weight: var(--font-weight-text2);
-  font-size: 36px;
-  margin-bottom: 16px;
-  cursor: pointer;
-  display: inline-block;
-}
-.header-arrow--white {
-  color: var(--purple-light-1);
-}
-
-.header-searchForm {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  flex-wrap: nowrap;
-}
-
-.header-searchForm input {
-  height: 48px;
-  width: 100%;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-}
-.header-searchForm button {
-  width: 56px;
-  height: 48px;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
 /* Trending */
-.trendingPreview-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
 .trendingPreview-btn {
   border-radius: 8px;
@@ -197,27 +152,27 @@ button {
   overflow-y: hidden;
   white-space: nowrap;
   height: 241px;
-  padding-bottom: 16px;
-  padding-right: 5px;
 }
 
 .trendingPreview-foodList .food-container {
   display: inline-block;
-  margin-right: 8px;
+  margin-right: 20px;
 }
 
 .trendingPreview-foodList .food-container .food-img {
-  height: 225px;
-  min-height: 225px;
-  max-height: 225px;
-  width: 150px;
-  min-width: 150px;
-  max-width: 150px;
+  height: 245px;
+  min-height: 245px;
+  max-height: 245px;
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
 }
 
 /* Categories */
 .category-title {
   display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
   margin: 10px;
   padding: 10px;
   cursor: pointer;
@@ -227,31 +182,16 @@ button {
   border: 2px solid var(--idColor);
   border-radius: 8px;
   color: var(--idColor);
-  background-color: var(--purple-light-2);
-  text-align: center;
+  background-color: var(--purple-medium-1);
   width: 150px;
   height: 50px;
-  line-height: 50px;
   font-weight: var(--font-weight-text2);
 }
 
-.categoriesPreview-List {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px; /* Ajusta el valor de gap según tu preferencia */
-  text-align: center;
-}
-
-
-
-
-
-
-
 /* Footer */
 footer {
-  background-color:  var(--darkBlue);
-  color: var(--purple-light-2);
+  background-color:#333;
+  color: #EEEAF2;
   text-align: center;
   height: 40px;
   display: flex;
@@ -263,3 +203,54 @@ footer {
 .inactive {
   display: none;
 }
+
+.search-bar {
+  background-color: #333;
+  padding: 10px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; 
+}
+
+li {
+  margin: 0 20px;
+  position: relative;
+  text-align: center; 
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+ul ul {
+  display: none;
+  position: absolute;
+  background-color: #333;
+}
+
+li:hover > ul {
+  display: block;
+}
+
+ul ul li {
+  display: block;
+  margin: 0; 
+}
+
+ul ul li a {
+  color: #fff;
+  padding: 10px;
+  display: block;
+}
+
+ul ul li a:hover {
+  background-color: #555;
+}
+
+

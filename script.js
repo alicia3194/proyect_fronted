@@ -1,236 +1,128 @@
-// 10 platos aleatorios para la seccion de platos populares
+// Variables para almacenar elementos HTML
+const categoriesPreview = document.getElementById("categoriesPreview");
+const categoryImages = document.getElementById("categoryImages");
 
-async function getRandomFoodPreview() {
+// Función para mostrar la vista de categorías
+function showCategoriesView() {
+  categoriesPreview.classList.remove("inactive");
+  categoryImages.classList.add("inactive");
+}
+
+// Función para mostrar la vista de imágenes de una categoría
+function showCategoryImagesView() {
+  categoriesPreview.classList.add("inactive");
+  categoryImages.classList.remove("inactive");
+}
+
+// Event listener para el botón "Volver" en la vista de imágenes de categoría
+const backBtn = document.querySelector(".categoryImages-backBtn");
+backBtn.addEventListener("click", showCategoriesView);
+
+// Sección para cargar categorías y comidas populares
+async function loadCategoriesAndRandomFood() {
   try {
-    const numRandomMeals = 8;
-    const randomMeals = [];
-
+    const numMeals = 8;
     const trendingPreviewSection = document.querySelector(
       "#trendingPreview .trendingPreview-foodList"
     );
+    const categoriesPreviewList = document.getElementById(
+      "categoriesPreviewList"
+    );
+    const allowedCategories = ["Dessert", "Vegan", "Vegetarian"];
 
-    // Para no repetir cuando se vuelve al inicio
-    trendingPreviewSection.innerHTML = "";
+    // Cargar categorías
+    const categoriesResponse = await fetch(
+      "https://www.themealdb.com/api/json/v1/1/categories.php"
+    );
+    const categoriesData = await categoriesResponse.json();
+    const categories = categoriesData.categories;
 
-    for (let i = 0; i < numRandomMeals; i++) {
+    // Llenar la lista de categorías
+    categories.forEach((category) => {
+      if (allowedCategories.includes(category.strCategory)) {
+        const categoryContainer = document.createElement("div");
+        categoryContainer.classList.add("category-container");
+
+        const categoryTitle = document.createElement("h3");
+        categoryTitle.classList.add("category-title");
+        categoryTitle.textContent = category.strCategory;
+
+        categoryTitle.addEventListener("click", () => {
+          getImagesForCategory(category.strCategory);
+        });
+
+        categoryContainer.appendChild(categoryTitle);
+        categoriesPreviewList.appendChild(categoryContainer);
+      }
+    });
+
+    // Cargar comidas populares
+    for (let i = 0; i < numMeals; i++) {
       const response = await fetch(
         "https://www.themealdb.com/api/json/v1/1/random.php"
       );
-
       const data = await response.json();
       const food = data.meals[0];
 
-      const foodContainer = document.createElement("div");
-      foodContainer.classList.add("food-container");
+      if (food && allowedCategories.includes(food.strCategory)) {
+        const foodContainer = document.createElement("div");
+        foodContainer.classList.add("food-container");
 
-      const foodImg = document.createElement("img");
-      foodImg.classList.add("food-img");
-      foodImg.setAttribute("alt", food.strMeal);
-      foodImg.setAttribute("src", food.strMealThumb);
+        const foodImg = document.createElement("img");
+        foodImg.classList.add("food-img");
+        foodImg.setAttribute("alt", food.strMeal);
+        foodImg.setAttribute("src", food.strMealThumb);
 
-      foodContainer.appendChild(foodImg);
-      trendingPreviewSection.appendChild(foodContainer);
-
-      randomMeals.push(food);
+        foodContainer.appendChild(foodImg);
+        trendingPreviewSection.appendChild(foodContainer);
+      } else {
+        i--;
+      }
     }
   } catch (error) {
     console.error(error);
   }
 }
 
-// seccion para las categorias de platos
+// NOMBRES E IMAGENES CATEGORIAS
+function getImagesForCategory(categoryName) {
+  const categoryImagesList = document.querySelector(".categoryImages-list");
+  categoryImagesList.innerHTML = "";
 
-async function getCategoriesPreview() {
-  try {
-    const response = await fetch(
-      "https://www.themealdb.com/api/json/v1/1/categories.php"
-    );
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const meals = data.meals;
 
-    const data = await response.json();
-    const categories = data.categories;
+      showCategoryImagesView();
 
-    // Igual que con la función getRandom
-    categoriesPreviewList.innerHTML = "";
+      meals.forEach((meal) => {
+        const foodContainer = document.createElement("div");
+        foodContainer.classList.add("food-container");
 
-    categories.forEach((category) => {
-      const categoryContainer = document.createElement("div");
-      categoryContainer.classList.add("category-container");
+        const foodImg = document.createElement("img");
+        foodImg.classList.add("food-img");
+        foodImg.setAttribute("alt", meal.strMeal);
+        foodImg.setAttribute("src", meal.strMealThumb);
 
-      const categoryTitle = document.createElement("h3");
-      categoryTitle.classList.add("category-title");
-      const categoryTitleText = document.createTextNode(category.strCategory);
+        const foodTitle = document.createElement("h4");
+        foodTitle.classList.add("food-title");
+        foodTitle.textContent = meal.strMeal;
 
-      categoryTitle.appendChild(categoryTitleText);
-      categoryContainer.appendChild(categoryTitle);
-      categoriesPreviewList.appendChild(categoryContainer);
+        foodContainer.appendChild(foodImg);
+        foodContainer.appendChild(foodTitle);
+        categoryImagesList.appendChild(foodContainer);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
     });
-  } catch (error) {
-    console.error(error);
-  }
-}
-getCategoriesPreview();
-
-//NODE
-// Sections
-const headerSection = document.querySelector("#header");
-const trendingPreviewSection = document.querySelector("#trendingPreview");
-const categoriesPreviewSection = document.querySelector("#categoriesPreview");
-const genericSection = document.querySelector("#genericList");
-const foodDetailSection = document.querySelector("#foodDetail");
-
-// Lists & Containers
-const searchForm = document.querySelector("#searchForm");
-const trendingFoodPreviewList = document.querySelector(
-  ".trendingPreview-foodList"
-);
-const categoriesPreviewList = document.querySelector(".categoriesPreview-list");
-const foodDetailCategoriesList = document.querySelector(
-  "#foodDetail .categories-list"
-);
-const relatedFoodContainer = document.querySelector(
-  ".relatedFood-scrollContainer"
-);
-
-// Elements
-const headerTitle = document.querySelector(".header-title");
-const arrowBtn = document.querySelector(".header-arrow");
-const headerCategoryTitle = document.querySelector(
-  ".header-title--categoryView"
-);
-
-const searchFormInput = document.querySelector("#searchForm input");
-const searchFormBtn = document.querySelector("#searchBtn");
-
-const trendingBtn = document.querySelector(".trendingPreview-btn");
-
-const foodDetailTitle = document.querySelector(".foodDetail-title");
-const foodDetailDescription = document.querySelector(".foodDetail-description");
-const foodDetailScore = document.querySelector(".foosDetail-score");
-
-//Función navegación
-
-searchFormBtn.addEventListener("click", () => {
-  location.hash = "#search=";
-});
-
-trendingBtn.addEventListener("click", () => {
-  location.hash = "#trends";
-});
-
-arrowBtn.addEventListener("click", () => {
-  location.hash = "#home";
-});
-
-window.addEventListener("DOMContentLoaded", navigation, false);
-window.addEventListener("hashchange", navigation, false);
-
-function navigation() {
-  if (location.hash.startsWith("#trends")) {
-    trendsPage();
-  } else if (location.hash.startsWith("#search=")) {
-    searchPage();
-  } else if (location.hash.startsWith("#food=")) {
-    foodDetailPage();
-  } else if (location.hash.startsWith("#category=")) {
-    categoriesPage();
-  } else {
-    homePage();
-  }
 }
 
-function homePage() {
-  console.log("HOME");
-  headerSection.classList.remove("header-container--long");
+// Cargar categorías y comidas populares al iniciar la página
+loadCategoriesAndRandomFood();
 
-  headerSection.style.background = "";
-
-  arrowBtn.classList.add("inactive");
-  arrowBtn.classList.remove("header-arrow--white");
-
-  headerTitle.classList.remove("inactive");
-  headerCategoryTitle.classList.add("inactive");
-
-  searchForm.classList.remove("inactive");
-  trendingPreviewSection.classList.remove("inactive");
-  categoriesPreviewSection.classList.remove("inactive");
-
-  genericSection.classList.add("inactive");
-  foodDetailSection.classList.add("inactive");
-
-  getRandomFoodPreview();
-  getCategoriesPreview();
-}
-
-function categoriesPage() {
-  console.log("CATEGORIES");
-
-  headerSection.classList.remove("header-container--long");
-  headerSection.style.background = "";
-
-  arrowBtn.classList.remove("inactive");
-  arrowBtn.classList.remove("header-arrow--white");
-
-  headerTitle.classList.add("inactive");
-  headerCategoryTitle.classList.remove("inactive");
-
-  searchForm.classList.add("inactive");
-
-  trendingPreviewSection.classList.add("inactive");
-  categoriesPreviewSection.classList.add("inactive");
-  genericSection.classList.remove("inactive");
-  foodDetailSection.classList.add("inactive");
-}
-function foodDetailPage() {
-  console.log("FOOD");
-
-  headerSection.classList.remove("header-container--long");
-  // headerSection.style.background = "";
-
-  arrowBtn.classList.remove("inactive");
-  arrowBtn.classList.remove("header-arrow--white");
-
-  headerTitle.classList.add("inactive");
-  headerCategoryTitle.classList.add("inactive");
-  searchForm.classList.add("inactive");
-
-  trendingPreviewSection.classList.add("inactive");
-  categoriesPreviewSection.classList.add("inactive");
-  genericSection.classList.add("inactive");
-  foodDetailSection.classList.remove("inactive");
-}
-function searchPage() {
-  console.log("SEARCH");
-
-  headerSection.classList.remove("header-container--long");
-  headerSection.style.background = "";
-
-  arrowBtn.classList.remove("inactive");
-  arrowBtn.classList.remove("header-arrow--white");
-
-  headerTitle.classList.add("inactive");
-  headerCategoryTitle.classList.remove("inactive");
-  searchForm.classList.remove("inactive");
-
-  trendingPreviewSection.classList.add("inactive");
-  categoriesPreviewSection.classList.add("inactive");
-  genericSection.classList.remove("inactive");
-  foodDetailSection.classList.add("inactive");
-}
-function trendsPage() {
-  console.log("TRENDS");
-
-  headerSection.classList.remove("header-container--long");
-  headerSection.style.background = "";
-
-  arrowBtn.classList.remove("inactive");
-  arrowBtn.classList.remove("header-arrow--white");
-
-  headerTitle.classList.add("inactive");
-  headerCategoryTitle.classList.remove("inactive");
-  searchForm.classList.add("inactive");
-
-  trendingPreviewSection.classList.add("inactive");
-  categoriesPreviewSection.classList.add("inactive");
-  genericSection.classList.remove("inactive");
-  foodDetailSection.classList.add("inactive");
-}
+//LOGIN
+//EXPLICACION PLATOS POPULARES Y CATEGORIAS
+//PODER ESCOGER Y QUE SE GUARDE
+//DEVOLVER LISTA PODER BUSCAR POR SU PAIS, PONER PAISES

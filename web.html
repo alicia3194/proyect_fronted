@@ -7,105 +7,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FoodWorld 🌐</title>
     <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
+    <nav class="search-bar">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Índice de Recetas</a>
+                <ul>
+                    <li><a href="#">Veganas</a></li>
+                    <li><a href="#">Vegetarianas</a></li>
+                    <li><a href="#">Postres</a></li>
+                </ul>
+            <li><a href="#">Contacto</a></li>
+            </li>
+        </ul>
+    </nav>
     <header id="header" class="header-container">
-        <span class="header-arrow inactive">&lt;</span>
         <h1 class="header-title" src="./logo.png">FoodWorld 🌐</h1>
         <h1 class="header-title header-title--categoryView inactive">Recetas</h1>
-        <!-- <div class="opening-paragraph">
-            <p>Explora, cocina y guarda tus recetas favoritas de todo el mundo en nuestra web culinaria. Sumérgete en un
-                mundo de sabores internacionales y encuentra la inspiración para tus comidas diarias. Además, podrás
-                guardar
-                y organizar tus recetas preferidas para futuros banquetes culinarios. </p>
-            <p>¡Descubre, cocina y colecciona
-                recetas
-                con nosotros!</p>
-        </div> -->
+        <input type="text" id="searchInput" placeholder="Buscar plato por nombre">
+        <button id="searchButton">🔎</button>
+        <p>"Cocinar es una experiencia maravillosa: fácil, divertida y un excelente antídoto contra el estrés. El
+            secreto radica en encontrar una receta que te apasione, tener un poco de paciencia, utilizar ingredientes de
+            calidad, ¡y voilà! No hay recompensa más gratificante que escuchar un '¡Ohhh! ¡Esto está delicioso!' y
+            disfrutar del aroma que llena toda la casa, convirtiéndote en la envidia de tu vecindario.
 
-        <form id="searchForm" class="header-searchForm"></form>
-        <input type="text" placeholder="Buscar">
-        <button id="searchBtn">🔎</button>
-        </form>
+            En este blog, comparto contigo una colección de recetas que he recopilado a lo largo de los años. Estas
+            recetas provienen de mis abuelas, tías abuelas, mi madre, amigos de diferentes partes del mundo y de chefs
+            profesionales que demuestran que todo es posible con las herramientas que tenemos en la cocina.
+
+            Aquí encontrarás una variedad de recetas veganas y vegetarianas de diferentes partes del mundo. Exploraremos
+            juntos los sabores y la diversidad de la comida basada en plantas, y aprenderemos a preparar platos
+            deliciosos que satisfarán tu paladar y nutrirán tu cuerpo. ¡Bienvenido a nuestro viaje culinario!"</p>
+        <div id="plateResults"></div>
     </header>
 
+    <!-- Inicio de sesión -->
+    <div id="loginContainer" style="display: none;">
+        <h2>Iniciar sesión</h2>
+        <form id="form2">
+            <input type="email" name="email2" placeholder="Email" required>
+            <input type="password" name="pass3" placeholder="Contraseña" required>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+    </div>
 
-    <!-- LISTA DE COMIDAS POPULARES -->
+    <!-- LISTA DE COMIDAS + BUSCADAS -->
     <section id="trendingPreview" class="trendingPreview-container">
         <div class="trendingPreview-header">
-            <h2 class="trendingPreview-title">Comidas populares</h2>
-            <button class="trendingPreview-btn">Ver más</button>
+            <h2 class="trendingPreview-title">Recetas más buscadas</h2>
         </div>
         <article class="trendingPreview-foodList">
         </article>
     </section>
 
 
-    <!-- categoria inicio -->
+
+    <!-- Sección para mostrar imágenes aleatorias -->
+    <section id="randomImages" style="display: none;">
+        <h2>Imágenes aleatorias</h2>
+        <div id="randomImageContainer">
+            <!-- Imágenes aleatorias con JavaScript -->
+        </div>
+
+    </section>
+
+    <!-- Sección de categorías -->
     <section id="categoriesPreview" class="categoriesPreview-container">
         <h2 class="categoriesPreview-title">Categorías</h2>
-
-        <article class="categoriesPreview-list">
-            <!-- <div class="category-container">
-            <h3 id="id28" class="category-title">Romance</h3>
-          </div> -->
+        <article id="categoriesPreviewList" class="categoriesPreview-list">
+            <!-- Categorías con JavaScript -->
         </article>
     </section>
 
-    <!-- lista generica en vertical -->
-    <section id="genericList" class="genericList-container inactive">
-        <div class="food-container">
-            <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
+    <!-- Sección para mostrar imágenes de la categoría -->
+    <section id="categoryImages" class="categoryImages-container inactive">
+        <div class="categoryImages-header">
+            <h2 class="categoryImages-title">Imágenes de la Categoría</h2>
+            <button class="categoryImages-backBtn">Volver</button>
         </div>
-        <div class="food-container">
-            <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
-        </div>
-        <div class="food-container">
-            <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
-        </div>
-        <div class="food-container">
-            <img src="./cosa-mano-familia-addams-miercoles.jpg" class="food-img" alt="Nombre comida">
-        </div>
-    </section>
-
-    <section id="foodDetail" class="foodDetail-container inactive">
-        <h1 class="foodDetail-title">Nombre plato</h1>
-        <p class="foodDetail-description"> Descripcion del plato</p>
-        <article class="categories-list">
-            <div class="category-container">
-                <h3 id="id28" class="catergory-title">Desayuno</h3>
-            </div>
-
-            <div class="category-container">
-                <h3 id="id16" class="catergory-title">Comidas</h3>
-            </div>
-            <div class="category-container">
-                <h3 id="id14" class="catergory-title">Postres</h3>
-            </div>
-        </article>
-
-        <article class="relatedFood-container">
-            <h2 class="relatedFood-title">Comidas similares</h2>
-
-            <div class="relatedFood-scrollContainer">
-                <div class="food-container">
-                    <img src="./cosa-mano-familia-addams-miercoles.jpg" alt="">
-                </div>
-                <div class="food-container">
-                    <img src="./cosa-mano-familia-addams-miercoles.jpg" alt="">
-                </div>
-                <div class="food-container">
-                    <img src="./cosa-mano-familia-addams-miercoles.jpg" alt="">
-                </div>
-                <div class="food-container">
-                    <img src="./cosa-mano-familia-addams-miercoles.jpg" alt="">
-                </div>
-            </div>
+        <article class="categoryImages-list">
+            <!--Imágenes de la categoría seleccionada -->
         </article>
     </section>
-    <footer> Δ Savor the Globe Δ</footer>
+
+    <footer>Δ Savor the Globe Δ</footer>
     <script src="./script.js"></script>
 </body>
 
