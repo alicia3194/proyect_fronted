@@ -1,38 +1,176 @@
-async function vegan() {
-  const res = await fetch(
-    "https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegan"
-  );
-  const data = await res.json();
+//buscar por el nombre del plato las instrucciones de él
+const search = document.getElementById("searchInput");
+const getInstruction = document.getElementById("searchButton");
+const instructions = document.getElementById("instructions");
 
-  const meals = data.meals;
+getInstruction.addEventListener("click", () => {
+  const nameFood = search.value;
 
-  const imgVegn1 = document.getElementById("img_veg1");
-  const imgVegn2 = document.getElementById("img_veg2");
-  const imgVegn3 = document.getElementById("img_veg3");
+  fetch("https://www.themealdb.com/api/json/v1/1/" + "search.php?s=" + nameFood) //final url nombre
+    .then((response) => response.json())
 
-  imgVegn1.src = meals[0].strMealThumb;
-  imgVegn2.src = meals[1].strMealThumb;
-  imgVegn3.src = meals[2].strMealThumb;
+    .then((data) => {
+      const meal = data.meals ? data.meals[0] : null;
+
+      const allInstructions = meal
+        ? meal.strInstructions
+        : "No recipes found with that name.";
+
+      instructions.innerHTML = allInstructions;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+const categoriesPreview = document.getElementById("categoriesPreview");
+const categoryImages = document.getElementById("categoryImages");
+
+function showCategoriesView() {
+  categoriesPreview.classList.remove("inactive");
+  categoryImages.classList.add("inactive");
 }
 
-vegan();
+function showCategoryImagesView() {
+  categoriesPreview.classList.add("inactive");
+  categoryImages.classList.remove("inactive");
+}
 
-//POR CATEGORIAS
+// Event listener para el botón "Volver" en la vista de imágenes de categoría
+const backBtn = document.querySelector(".categoryImages-backBtn");
+backBtn.addEventListener("click", showCategoriesView);
 
-// www.themealdb.com/api/json/v1/1/filter.php?c=Vegan --- HAY TRES
-//ID: 52942, 52794, 52775.
+// Sección para cargar categorías y comidas populares
+async function loadCategoriesAndRandomFood() {
+  try {
+    const numMeals = 8;
+    const trendingPreviewSection = document.querySelector(
+      "#trendingPreview .trendingPreview-foodList"
+    );
+    const categoriesPreviewList = document.getElementById(
+      "categoriesPreviewList"
+    );
+    const allowedCategories = ["Dessert", "Vegan", "Vegetarian"];
 
-//https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian  --- HAY +10
+    // Cargar categorías
+    const categoriesResponse = await fetch(
+      "https://www.themealdb.com/api/json/v1/1/categories.php"
+    );
+    const categoriesData = await categoriesResponse.json();
+    const categories = categoriesData.categories;
 
-//https://www.themealdb.com/api/json/v1/1/filter.php?c=Breakfast   --- HAY 8
+    // Llenar la lista de categorías
+    categories.forEach((category) => {
+      if (allowedCategories.includes(category.strCategory)) {
+        const categoryContainer = document.createElement("div");
+        categoryContainer.classList.add("category-container");
 
-//https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert   -- HAY +10
+        const categoryTitle = document.createElement("h3");
+        categoryTitle.classList.add("category-title");
+        categoryTitle.textContent = category.strCategory;
 
-// -------------------
+        categoryTitle.addEventListener("click", () => {
+          getImagesForCategory(category.strCategory);
+        });
 
-// POR ID
+        categoryContainer.appendChild(categoryTitle);
+        categoriesPreviewList.appendChild(categoryContainer);
+      }
+    });
 
-//buscar idMeal, strMeal(nombre plato),strCategory(vegano etc), strArea (pais)
-// strInstructions (instrucciones de los platos)
+    // comidas populares
+    for (let i = 0; i < numMeals; i++) {
+      const response = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/random.php"
+      );
+      const data = await response.json();
+      const food = data.meals[0];
 
-//sale mucha más información
+      if (food && allowedCategories.includes(food.strCategory)) {
+        const foodContainer = document.createElement("div");
+        foodContainer.classList.add("food-container");
+
+        const foodImg = document.createElement("img");
+        foodImg.classList.add("food-img");
+        foodImg.setAttribute("alt", food.strMeal);
+        foodImg.setAttribute("src", food.strMealThumb);
+
+        foodContainer.appendChild(foodImg);
+        trendingPreviewSection.appendChild(foodContainer);
+      } else {
+        i--;
+      }
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// NOMBRES E IMAGENES CATEGORIAS
+function getImagesForCategory(categoryName) {
+  const categoryImagesList = document.querySelector(".categoryImages-list");
+  categoryImagesList.innerHTML = "";
+
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const meals = data.meals;
+
+      showCategoryImagesView();
+
+      meals.forEach((meal) => {
+        const foodContainer = document.createElement("div");
+        foodContainer.classList.add("food-container");
+
+        const foodImg = document.createElement("img");
+        foodImg.classList.add("food-img");
+        foodImg.setAttribute("alt", meal.strMeal);
+        foodImg.setAttribute("src", meal.strMealThumb);
+
+        const foodTitle = document.createElement("h4");
+        foodTitle.classList.add("food-title");
+        foodTitle.textContent = meal.strMeal;
+
+        foodContainer.appendChild(foodImg);
+        foodContainer.appendChild(foodTitle);
+        categoryImagesList.appendChild(foodContainer);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+loadCategoriesAndRandomFood();
+
+// VALIDACIÓN FORMULARIO
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contactForm");
+
+  form.addEventListener("submit", function (event) {
+    if (!validateForm()) {
+      event.preventDefault();
+    }
+  });
+
+  const validateForm = () => {
+    const fname = document.getElementById("fname").value;
+    const email = document.getElementById("email").value;
+
+    if (fname.length < 3 || fname.length > 30) {
+      alert("Invalid name.");
+      return false;
+    }
+
+    if (
+      (!email.endsWith(".com") && !email.endsWith(".es")) ||
+      !email.includes("@")
+    ) {
+      console.log("Error: " + email);
+      msj += "Error: " + email + "\n";
+    }
+
+    return true;
+  };
+});
