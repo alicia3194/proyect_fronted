@@ -12,14 +12,14 @@
 <body>
     <nav class="search-bar">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Recipes</a>
+            <li><a href="./web.html">Home</a></li>
+            <li><a href="../asses/recipes.html">Favorites</a>
                 <ul>
-                    <li><a href="#">Vegan</a></li>
-                    <li><a href="#">Vegetarian</a></li>
-                    <li><a href="#">Desserts</a></li>
+                    <li><a href="../asses/recipes.html">Vegan</a></li>
+                    <li><a href="../asses/recipes.html">Vegetarian</a></li>
+                    <li><a href="../asses/recipes.html">Desserts</a></li>
                 </ul>
-            <li><a href="#">Contact</a></li>
+            <li><a href="../asses/form.html">Contact</a></li>
             </li>
         </ul>
     </nav>
@@ -27,6 +27,10 @@
         <h1 class="header-title" src="./logo.png">FoodWorld 🌐</h1>
         <input type="text" id="searchInput" placeholder="Search by plate name">
         <button id="searchButton">🔎</button>
+        <p id="instructions"></p>
+    </header>
+
+    <div id="home-color">
         <p>Cooking is a wonderful experience: easy, fun, and an excellent antidote to stress. The secret lies in finding
             a recipe that excites you, having a bit of patience, using quality ingredients, and voilà! There's no more
             rewarding feeling than hearing a 'Ohhh! This is delicious!' and enjoying the aroma that fills the entire
@@ -40,16 +44,6 @@
             explore the flavors and diversity of plant-based cuisine and learn to prepare delicious dishes that will
             satisfy your palate and nourish your body.</p>
         <p><strong>Welcome to our culinary journey!</strong></p>
-    </header>
-
-    <!-- Inicio de sesión -->
-    <div id="loginContainer" style="display: none;">
-        <h2>Iniciar sesión</h2>
-        <form id="form2">
-            <input type="email" name="email2" placeholder="Email" required>
-            <input type="password" name="pass3" placeholder="Contraseña" required>
-            <button type="submit">Iniciar sesión</button>
-        </form>
     </div>
 
     <!-- LISTA DE COMIDAS + BUSCADAS -->
@@ -60,8 +54,6 @@
         <article class="trendingPreview-foodList">
         </article>
     </section>
-
-
 
     <!-- Sección para mostrar imágenes aleatorias -->
     <section id="randomImages" style="display: none;">
@@ -96,6 +88,7 @@
 
     <footer>Δ Savor the Globe Δ</footer>
     <script src="./script.js"></script>
+    <script src="./login.js"></script>
 </body>
 
 </html>

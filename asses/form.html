@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodWorld 🌐</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <nav class="search-bar">
+        <ul>
+            <li><a href="../web.html">Home</a></li>
+            <li><a href="./recipes.html">Favorites</a>
+                <ul>
+                    <li><a href="./recipes.html">Vegan</a></li>
+                    <li><a href="./recipes.html">Vegetarian</a></li>
+                    <li><a href="./recipes.html">Desserts</a></li>
+                </ul>
+            <li><a href="./form.html">Contact</a></li>
+            </li>
+        </ul>
+    </nav>
+    <header id="header" class="header-container">
+        <h1 class="header-title" src="./logo.png">FoodWorld 🌐</h1>
+    </header>
+
+    <section id="contact">
+        <form id="contactForm">
+            <label for="fname">Name:</label>
+            <input type="text" id="fname" name="fname" placeholder="Write your name..." minlength="3" maxlenght="9" />
+
+            <label for="fname">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Write your email..." />
+
+            <label for="favorite">What dishes have you missed?:</label>
+            <input type="favorite" id="favorite" name="favorite" placeholder="Write here..." />
+
+            <input id="input" type="submit" value="Send" />
+    </section>
+
+    <script src="./script.js"></script>
+    <script src="./login.js"></script>
+</body>
+
+</html>

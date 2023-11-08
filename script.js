@@ -1,14 +1,36 @@
-// Variables para almacenar elementos HTML
+//buscar por el nombre del plato las instrucciones de él
+const search = document.getElementById("searchInput");
+const getInstruction = document.getElementById("searchButton");
+const instructions = document.getElementById("instructions");
+
+getInstruction.addEventListener("click", () => {
+  const nameFood = search.value;
+
+  fetch("https://www.themealdb.com/api/json/v1/1/" + "search.php?s=" + nameFood) //final url nombre
+    .then((response) => response.json())
+
+    .then((data) => {
+      const meal = data.meals ? data.meals[0] : null;
+
+      const allInstructions = meal
+        ? meal.strInstructions
+        : "No recipes found with that name.";
+
+      instructions.innerHTML = allInstructions;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 const categoriesPreview = document.getElementById("categoriesPreview");
 const categoryImages = document.getElementById("categoryImages");
 
-// Función para mostrar la vista de categorías
 function showCategoriesView() {
   categoriesPreview.classList.remove("inactive");
   categoryImages.classList.add("inactive");
 }
 
-// Función para mostrar la vista de imágenes de una categoría
 function showCategoryImagesView() {
   categoriesPreview.classList.add("inactive");
   categoryImages.classList.remove("inactive");
@@ -56,7 +78,7 @@ async function loadCategoriesAndRandomFood() {
       }
     });
 
-    // Cargar comidas populares
+    // comidas populares
     for (let i = 0; i < numMeals; i++) {
       const response = await fetch(
         "https://www.themealdb.com/api/json/v1/1/random.php"
@@ -119,10 +141,36 @@ function getImagesForCategory(categoryName) {
     });
 }
 
-// Cargar categorías y comidas populares al iniciar la página
 loadCategoriesAndRandomFood();
 
-//LOGIN
-//EXPLICACION PLATOS POPULARES Y CATEGORIAS
-//PODER ESCOGER Y QUE SE GUARDE
-//DEVOLVER LISTA PODER BUSCAR POR SU PAIS, PONER PAISES
+// VALIDACIÓN FORMULARIO
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contactForm");
+
+  form.addEventListener("submit", function (event) {
+    if (!validateForm()) {
+      event.preventDefault();
+    }
+  });
+
+  const validateForm = () => {
+    const fname = document.getElementById("fname").value;
+    const email = document.getElementById("email").value;
+
+    if (fname.length < 3 || fname.length > 30) {
+      alert("Invalid name.");
+      return false;
+    }
+
+    if (
+      (!email.endsWith(".com") && !email.endsWith(".es")) ||
+      !email.includes("@")
+    ) {
+      console.log("Error: " + email);
+      msj += "Error: " + email + "\n";
+    }
+
+    return true;
+  };
+});
