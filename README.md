@@ -53,3 +53,5 @@ Below, I'm sharing the initial web sketch of the FoodWorld homepage:
 This sketch serves as a guide for the application's structure and design. As we progress in development, we are working to transform this sketch into a fully functional web application.
 
 ## FoodWorld on GitHub Pages
+
+https://alicia3194.github.io/proyect_fronted/index.html
