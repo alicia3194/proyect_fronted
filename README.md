@@ -47,6 +47,9 @@ I have used Trello as a project management tool to organize and plan the develop
 
 Below, I'm sharing the initial web sketch of the FoodWorld homepage:
 
+<img src="./images/trello.png" width="450" height="450"/>
+
+
 This sketch serves as a guide for the application's structure and design. As we progress in development, we are working to transform this sketch into a fully functional web application.
 
 ## FoodWorld on GitHub Pages
